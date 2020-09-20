@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+</head>
+<body>
+
+    <div class="container" style="margin-top: 100px;">
+        <h3>Todo List</h3>
+        <hr>
+        <form action="/add" method="POST">
+            <div class="form-group">
+                <label for="todoInput">Todo</label>
+                <input type="text" class="form-control" id="todoInput" name="title" placeholder="Todo Girin">
+                <button type="submit" class="btn btn-danger mt-3">Ekle</button>
+              </div>
+        </form>
+        <hr>
+
+        {% if todos == [] %}
+        <div class="alert alert-warning">Herhangi bir Todo bulunmuyor</div>
+        <small>Ekle butonu ile ekleyebilirsiniz</small>
+        
+        {% else %}
+
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Todo</th>
+              <th scope="col">Durum</th>
+              <th scope="col">Güncelle</th>
+              <th scope="col">Sil</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+              {% for todo in todos %}
+              <tr>
+                  <th>{{todo.id}}</th>
+                  <td>{{todo.title}}</td>
+                  {% if todo.complete == False %}
+                  <td>❌</td>
+                  {% else %}
+                  <td>✔️</td>
+                  {% endif %}
+                  <td><a href="/complete/{{todo.id}}" class="btn btn-danger">Güncelle</a></td>
+                  <td><a href="/delete/{{todo.id}}" class="btn btn-danger">Sil</a></td>
+              </tr>
+              {% endfor %}
+        {% endif %}
+
+        
+                             
+            </tbody>
+          </table>
+    </div>
+    
+
+
+
+
+
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
